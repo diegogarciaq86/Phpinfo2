@@ -1,0 +1,39 @@
+# This is a basic wrokflow to get started with acctions
+name: simple
+
+# Controls when the workflow run
+on:
+  # Trigergers the workflow on push or pull request events but only to the main branch
+  # Allows you to run this workflow manually from actions tab "workflow_dispatch:""
+  workflow_dispatch:
+
+  # When triggered ex pull_request
+  # pull_request
+  # On wich branch to be deployed Branches
+  # branches: [ main ]
+  
+# A workflow run is made up of one or more jobs that can run sequentially on in parallel
+jobs:
+  #This workflow contains a single job called "Build"
+  build:
+    # tghe type of runner that the job will run on
+    runs-on:
+      - self-hosted
+
+    #Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Checks for the repository under $GITHUB_WORKSPACE, so you can access it
+      - uses: actions/checkout@v2
+     
+      # Runs a sinble command using the runners shell
+      - name: Run a one line script
+        run: |
+          echo Hello World!
+          sleep 15
+          echo Goodbye!
+
+      # Runs a set of commands using the runners shell
+      - name: run a multi-line script
+        run: | 
+          echo "${{ github.workspace }}"
